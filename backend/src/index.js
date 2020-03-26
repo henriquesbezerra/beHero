@@ -1,9 +1,14 @@
 const express = require('express');
-
+const cors = require('cors');
+const routes = require('./routes');
 const app = express();
+
+app.use(cors());
 
 // Antes de todas as requisições, converter json em objeto javascript
 app.use(express.json());
+
+app.use(routes);
 
 /**
  * Rota / Recurso
@@ -34,25 +39,11 @@ app.use(express.json());
     * NoSQL: MongoDB, CouchDB, etc.
     */
 
-app.get('/:id', (request, response) =>{
-    const params = request.params;
-    const queries = request.query;
-    const body = request.body;
-    console.log(params, queries);
-    return response.json({
-        evento: 'Semana OmniStack 11.0',
-        aluno: 'Henrique Silva'
-    });
-});
-
-app.post('/', (request, response) =>{   
-    const body = request.body;
-    console.log(body);
-    return response.json({
-        evento: 'Semana OmniStack 11.0',
-        aluno: 'Henrique Silva'
-    });
-});
+    /**
+     * Driver: SELECT * FROM users
+     * Query Builder: table('users').select('*').where()
+     * Query Builder -> knex.js
+     */
 
 
 app.listen(3333);
